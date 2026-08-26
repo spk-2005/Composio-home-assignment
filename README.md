@@ -1,44 +1,81 @@
-# Composio App Research Agent
+# Composio AI Product Ops — App Research Agent
 
-Take-home assignment for the Composio AI Product Ops Intern role.
+An agent-driven research pipeline for evaluating whether software applications are suitable for integration into an AI agent platform.
 
-Research 100 applications for auth, API surface, MCP availability, buildability, and evidence-backed findings.
+The assignment involves researching 100 applications across multiple categories and determining:
 
-## Status
+- What the application does
+- Authentication methods
+- Whether developer credentials are self-serve or gated
+- Public API availability
+- API breadth
+- MCP availability
+- Buildability for an AI toolkit
+- Main blockers
+- Evidence supporting the findings
+- Confidence and uncertainty
 
-Scaffold only — research logic not yet implemented.
+The project also includes a research-analysis layer and a case-study interface for presenting the findings.
 
-## Project structure
+---
 
-```
-agent/          Research agent modules
-data/apps.json  100-app research set
-results/        Pipeline output (JSON)
-scripts/        CLI entry points
-web/            Self-contained HTML case study deliverable
-```
+## 1. Problem
 
-## Setup
+Composio needs to evaluate hundreds of applications before deciding whether to build integrations/toolkits for them.
 
-```bash
-python -m venv .venv
-.venv\Scripts\activate   # Windows
-pip install -r requirements.txt
-```
+Doing this manually requires repeatedly answering questions such as:
 
-Create `.env` in the project root (never commit it):
+> Does this application have a public API?
 
-```
-COMPOSIO_API_KEY=...
-OPENAI_API_KEY=...
-```
+> What authentication does it support?
 
-## Run (coming soon)
+> Can a developer obtain credentials without contacting sales?
 
-```bash
-python scripts/run_research.py
-python scripts/verify_results.py
-python scripts/analyze_results.py
-```
+> Is OAuth required?
 
-Open `web/index.html` in a browser for the case study deliverable.
+> Does an MCP server already exist?
+
+> Are there meaningful restrictions?
+
+> Can this application realistically become an AI-agent tool?
+
+The goal of this project is to automate as much of this research process as possible while keeping the results evidence-driven and verifiable.
+
+---
+
+# 2. Approach
+
+The project uses a multi-stage pipeline:
+
+```text
+                apps.json
+                    |
+                    v
+          +--------------------+
+          | Research Agent     |
+          +--------------------+
+                    |
+          +---------+---------+
+          |                   |
+          v                   v
+    Web Search            App Website
+          |                   |
+          +---------+---------+
+                    |
+                    v
+            Source Collection
+                    |
+                    v
+             LLM Research
+                    |
+                    v
+             Structured JSON
+                    |
+                    v
+          Verification Layer
+                    |
+                    v
+          Analysis / Insights
+                    |
+                    v
+             Case Study

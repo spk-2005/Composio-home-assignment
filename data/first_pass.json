@@ -1,0 +1,226 @@
+[
+  {
+    "app": "Salesforce",
+    "category": "CRM and Sales",
+    "description": "AI CRM platform for businesses",
+    "auth_methods": [],
+    "credential_access": "self-serve",
+    "api": {
+      "public": true,
+      "type": "public",
+      "breadth": "broad"
+    },
+    "mcp": {
+      "available": false,
+      "source": "https://salesforce.com",
+      "url": "https://salesforce.com"
+    },
+    "buildability": "EASY",
+    "blocker": "unknown",
+    "evidence": [
+      {
+        "claim": "Public API",
+        "url": "https://salesforce.com",
+        "source_type": "website",
+        "quote_or_summary": "Salesforce: The #1 AI CRM | Salesforce IN Skip to content Get Started with Salesforce..."
+      },
+      {
+        "claim": "Breadth",
+        "url": "https://salesforce.com",
+        "source_type": "website",
+        "quote_or_summary": "Salesforce is the platform for the Agentic Enterprise Our deeply unified platform brings together apps, data, agents, and metadata to drive customer and employee success."
+      }
+    ],
+    "confidence": 70.0,
+    "uncertainty": []
+  },
+  {
+    "app": "HubSpot",
+    "category": "CRM and Sales",
+    "description": "HubSpot's Agentic Customer Platform that unifies marketing, sales, and customer service with AI-powered tools",
+    "auth_methods": [
+      "OAuth",
+      "Static Auth"
+    ],
+    "credential_access": "Self-serve",
+    "api": {
+      "public": true,
+      "type": "Broad",
+      "breadth": "Comprehensive"
+    },
+    "mcp": {
+      "available": true,
+      "source": "https://hubspot.com",
+      "url": "https://hubspot.com"
+    },
+    "buildability": "EASY",
+    "blocker": "OAuth backend setup required for multi-account distribution",
+    "evidence": [
+      {
+        "claim": "OAuth authentication is required for multi-account distribution",
+        "url": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/overview",
+        "source_type": "Developer Documentation",
+        "quote_or_summary": "OAuth is required for multiple accounts, while static auth access tokens are used for single-account installations."
+      },
+      {
+        "claim": "Static auth access tokens are available for single-account installations",
+        "url": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/overview",
+        "source_type": "Developer Documentation",
+        "quote_or_summary": "Static auth tokens can be found in app settings and are used for single-account installations."
+      },
+      {
+        "claim": "API requests use Bearer HTTP authorization headers",
+        "url": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/overview",
+        "source_type": "Developer Documentation",
+        "quote_or_summary": "API requests use the Bearer HTTP authorization header with access tokens."
+      }
+    ],
+    "confidence": 9.0,
+    "uncertainty": []
+  },
+  {
+    "app": "Pipedrive",
+    "category": "CRM and Sales",
+    "description": "Sales CRM & Pipeline Management Software | Pipedrive",
+    "auth_methods": [
+      "OAuth 2.0"
+    ],
+    "credential_access": "Self-serve",
+    "api": {
+      "public": true,
+      "type": "OpenAPI-enabled",
+      "breadth": "Broad"
+    },
+    "mcp": {
+      "available": true,
+      "source": "https://pipedrive.readme.io/docs/marketplace-oauth-authorization",
+      "url": "https://pipedrive.readme.io/docs/marketplace-oauth-authorization"
+    },
+    "buildability": "EASY",
+    "blocker": "Server-side logic required for OAuth flow",
+    "evidence": [
+      {
+        "claim": "Authentication method is OAuth 2.0",
+        "url": "https://pipedrive.readme.io/docs/marketplace-oauth-authorization",
+        "source_type": "Developer Documentation",
+        "quote_or_summary": "OAuth authorization Using OAuth 2.0 is necessary for developing apps that are available in the Pipedrive Marketplace."
+      },
+      {
+        "claim": "API type is OpenAPI-enabled",
+        "url": "https://pipedrive.readme.io/docs/marketplace-oauth-authorization",
+        "source_type": "Developer Documentation",
+        "quote_or_summary": "Endpoints in OpenAPI"
+      },
+      {
+        "claim": "API breadth is Broad",
+        "url": "https://pipedrive.com",
+        "source_type": "Website",
+        "quote_or_summary": "500+ integrations to boost workflows"
+      }
+    ],
+    "confidence": 9.0,
+    "uncertainty": []
+  },
+  {
+    "app": "Attio",
+    "category": "CRM and Sales",
+    "description": "A CRM platform designed to manage pipeline, advance deals, and grow accounts through automation and workflow orchestration.",
+    "auth_methods": [
+      "OAuth 2.0",
+      "API Key"
+    ],
+    "credential_access": "self-serve",
+    "api": {
+      "public": true,
+      "type": "REST",
+      "breadth": "broad"
+    },
+    "mcp": {
+      "available": false,
+      "source": "https://docs.attio.com/rest-api/guides/authentication",
+      "url": "https://docs.attio.com/rest-api/guides/authentication"
+    },
+    "buildability": "EASY",
+    "blocker": "Authentication process requires access tokens, which must be generated via OAuth 2.0 or API key.",
+    "evidence": [
+      {
+        "claim": "Public API",
+        "url": "https://attio.com",
+        "source_type": "website",
+        "quote_or_summary": "Attio is a SaaS product with a public API for integration and automation."
+      },
+      {
+        "claim": "REST API type",
+        "url": "https://attio.com",
+        "source_type": "website",
+        "quote_or_summary": "The platform provides a REST API for developers to interact with its CRM features."
+      },
+      {
+        "claim": "Authentication methods",
+        "url": "https://docs.attio.com/rest-api/guides/authentication",
+        "source_type": "documentation",
+        "quote_or_summary": "OAuth 2.0 and API keys are supported for accessing the REST API."
+      },
+      {
+        "claim": "Self-serve credentials",
+        "url": "https://attio.com",
+        "source_type": "website",
+        "quote_or_summary": "Credentials are managed by the user for accessing the platform's API."
+      },
+      {
+        "claim": "Broad API breadth",
+        "url": "https://attio.com",
+        "source_type": "website",
+        "quote_or_summary": "The API supports workflows, automation, and integration with tools like GreenLeaf and Ramp."
+      }
+    ],
+    "confidence": 9.0,
+    "uncertainty": [
+      "MCP availability"
+    ]
+  },
+  {
+    "app": "Twenty",
+    "category": "CRM and Sales",
+    "description": "An open-source CRM platform designed for technical teams to build custom CRM systems that adapt to evolving business needs.",
+    "auth_methods": [
+      "OAuth 2.0 (Authorization Code + PKCE for user-facing apps)",
+      "Client Credentials for server-to-server access"
+    ],
+    "credential_access": "Self-serve credentials (registered dynamically via RFC 7591, no manual setup required)",
+    "api": {
+      "public": true,
+      "type": "RESTful",
+      "breadth": "Broad (covers OAuth, Core/Metadata APIs, profile, workflows, etc.)"
+    },
+    "mcp": {
+      "available": false,
+      "source": "https://twenty.com",
+      "url": "https://twenty.com"
+    },
+    "buildability": "EASY",
+    "blocker": "None (public API with no significant approval barrier)",
+    "evidence": [
+      {
+        "claim": "OAuth 2.0 with authorization code + PKCE for user-facing apps",
+        "url": "https://docs.twenty.com/developers/extend/oauth",
+        "source_type": "Official Documentation",
+        "quote_or_summary": "Twenty implements OAuth 2.0 with authorization code + PKCE for user-facing apps and client credentials for server-to-server access."
+      },
+      {
+        "claim": "Clients registered dynamically via RFC 7591",
+        "url": "https://twenty.com",
+        "source_type": "Website",
+        "quote_or_summary": "Clients are registered dynamically via RFC 7591. No manual setup needed."
+      },
+      {
+        "claim": "Public API with no significant approval barrier",
+        "url": "https://twenty.com",
+        "source_type": "Website",
+        "quote_or_summary": "The API is public, self-serve credentials, standard authentication, useful/broad API, and no significant approval barrier."
+      }
+    ],
+    "confidence": 9.0,
+    "uncertainty": []
+  }
+]
