@@ -1,0 +1,8 @@
+composio
+openai
+python-dotenv
+pydantic
+httpx
+beautifulsoup4
+jinja2
+pandas
