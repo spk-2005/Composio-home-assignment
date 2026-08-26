@@ -222,5 +222,54 @@
     ],
     "confidence": 9.0,
     "uncertainty": []
+  },
+  {
+    "app": "Podio",
+    "category": "CRM and Sales",
+    "description": "Work Management Platform | Streamline Collaboration & Workflows | Podio Welcome to the new Progress Podio! Now find more product info at our new website here or read the blog to learn more. Simplify Work, Amplify Results with Progress Podio Unify and automate work with no-code tools, flexible workflows and customizable business solutions.",
+    "auth_methods": [
+      "OAuth2 Server-side flow",
+      "OAuth2 Client-side flow",
+      "Username & password flow",
+      "App authentication flow"
+    ],
+    "credential_access": "Self-serve",
+    "api": {
+      "public": true,
+      "type": "Public",
+      "breadth": "Broad"
+    },
+    "mcp": {
+      "available": false,
+      "source": "https://podio.com",
+      "url": null
+    },
+    "buildability": "Easy",
+    "blocker": "Unknown",
+    "evidence": [
+      {
+        "claim": "Authentication methods include OAuth2 Server-side flow, Client-side flow, Username & password flow, and App authentication flow",
+        "url": "https://developers.podio.com/authentication",
+        "source_type": "Developer Documentation",
+        "quote_or_summary": "Podio supports four different ways of authenticating depending on what kind of application you are building: Server-side flow This is the preferred way of authenticating for web apps. Client-side flow Use the client-side flow if your application does not have a server. Examples: Browser extensions, web app running purely in the browser, mobile or desktop applications. Username & password flow Use this flow only if none of the other flows are suitable. It requires the user's username and password to be shared. App authentication flow Use app authentication if you only need to interact with a single Podio app and do not need to authenticate as a specific user."
+      },
+      {
+        "claim": "Credentials are self-serve",
+        "url": "https://podio.com",
+        "source_type": "Website",
+        "quote_or_summary": "Your application is assigned a unique identifier, called \"Client ID\", together with a \"Client Secret\". You will need both of these to authenticate."
+      },
+      {
+        "claim": "API is public and has broad breadth",
+        "url": "https://podio.com",
+        "source_type": "Website",
+        "quote_or_summary": "Podio supports building digital workspaces tailored to your team's unique processes. Whether you're tracking leads, managing projects, streamlining operations or automating approvals, Podio is built to support a wide range of workflows."
+      }
+    ],
+    "confidence": 10.0,
+    "uncertainty": [
+      "MCP availability",
+      "Buildability details"
+    ]
   }
 ]
