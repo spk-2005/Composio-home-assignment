@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>App Research Agent — Composio Take-home</title>
+
+<style>
+:root {
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --text: #171717;
+    --muted: #667085;
+    --border: #e5e7eb;
+    --accent: #635bff;
+    --green: #16a34a;
+    --yellow: #d97706;
+    --red: #dc2626;
+    --dark: #111827;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+}
+
+.container {
+    width: min(1120px, calc(100% - 40px));
+    margin: auto;
+}
+
+.hero {
+    background: linear-gradient(135deg, #111827, #1f2937);
+    color: white;
+    padding: 70px 0;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.15);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    max-width: 900px;
+    font-size: clamp(38px, 6vw, 66px);
+    line-height: 1.02;
+    margin: 22px 0;
+    letter-spacing: -0.045em;
+}
+
+.hero p {
+    max-width: 820px;
+    font-size: 19px;
+    color: #d1d5db;
+}
+
+.hero-note {
+    margin-top: 28px;
+    padding: 15px 18px;
+    border-left: 3px solid #a5b4fc;
+    background: rgba(255,255,255,.06);
+    border-radius: 8px;
+    max-width: 850px;
+    font-size: 14px;
+}
+
+section {
+    padding: 55px 0;
+}
+
+h2 {
+    font-size: 30px;
+    letter-spacing: -.025em;
+    margin: 0 0 12px;
+}
+
+h3 {
+    margin-top: 0;
+}
+
+.subtitle {
+    color: var(--muted);
+    max-width: 800px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 22px;
+}
+
+.metric {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -.03em;
+}
+
+.metric-label {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.three {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.highlight {
+    border-left: 4px solid var(--accent);
+    background: #f1efff;
+}
+
+.warning {
+    border-left: 4px solid var(--yellow);
+    background: #fffbeb;
+}
+
+.success {
+    border-left: 4px solid var(--green);
+    background: #f0fdf4;
+}
+
+.danger {
+    border-left: 4px solid var(--red);
+    background: #fef2f2;
+}
+
+.pipeline {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 28px;
+}
+
+.pipeline-step {
+    flex: 1;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.pipeline-number {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--accent);
+}
+
+.pipeline-arrow {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: #98a2b3;
+}
+
+code {
+    background: #f1f3f5;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: .9em;
+}
+
+pre {
+    background: #111827;
+    color: #e5e7eb;
+    padding: 20px;
+    border-radius: 12px;
+    overflow-x: auto;
+    font-size: 13px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 13px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+
+th {
+    background: #f3f4f6;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.status {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.done {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.partial {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.pending {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.small {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.quote {
+    font-size: 20px;
+    line-height: 1.45;
+    font-weight: 650;
+}
+
+.footer {
+    padding: 40px 0 70px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 13px;
+}
+
+a {
+    color: var(--accent);
+}
+
+@media(max-width: 850px) {
+    .grid,
+    .three,
+    .two {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .pipeline {
+        flex-direction: column;
+    }
+
+    .pipeline-arrow {
+        justify-content: center;
+        transform: rotate(90deg);
+    }
+}
+
+@media(max-width: 600px) {
+    .grid,
+    .three,
+    .two {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        width: min(100% - 28px, 1120px);
+    }
+
+    .hero {
+        padding: 50px 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ========================================================= -->
+<!-- HERO -->
+<!-- ========================================================= -->
+
+<header class="hero">
+<div class="container">
+
+    <span class="badge">Composio · AI Product Ops Take-home</span>
+
+    <h1>
+        Researching app integrations with an evidence-driven agent.
+    </h1>
+
+    <p>
+        A research pipeline that turns a 100-app integration research
+        problem into a repeatable workflow: discover documentation,
+        collect evidence, generate structured findings, and validate
+        the output against a fixed schema.
+    </p>
+
+    <div class="hero-note">
+        <strong>Honest status:</strong>
+        the research pipeline is implemented and has successfully
+        produced validated results for the apps reached in the current
+        run. I am not claiming a completed 100-app dataset or a
+        verified accuracy percentage because those were not completed
+        before submission.
+    </div>
+
+</div>
+</header>
+
+
+<!-- ========================================================= -->
+<!-- SNAPSHOT -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<h2>At a glance</h2>
+
+<p class="subtitle">
+The important part is not scraping pages. It is creating a repeatable
+research process that can scale and preserve evidence instead of
+turning web research into unsupported guesses.
+</p>
+
+<div class="grid">
+
+<div class="card">
+    <div class="metric">100</div>
+    <div class="metric-label">apps in the supplied research set</div>
+</div>
+
+<div class="card">
+    <div class="metric">4</div>
+    <div class="metric-label">targeted research queries per app</div>
+</div>
+
+<div class="card">
+    <div class="metric">3</div>
+    <div class="metric-label">source-fetch limit per app</div>
+</div>
+
+<div class="card">
+    <div class="metric">1</div>
+    <div class="metric-label">structured research schema</div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- HEADLINE -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<div class="card highlight">
+
+<h2>The product insight</h2>
+
+<p class="quote">
+The hard part of app integration research is not finding an API URL.
+It is determining whether an agent can actually use that API:
+authentication, credential access, API breadth, MCP availability,
+and approval barriers all matter.
+</p>
+
+<p>
+That makes the output useful for prioritization rather than merely
+creating a directory of APIs.
+</p>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- WHAT I BUILT -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<h2>What I built</h2>
+
+<p class="subtitle">
+The implementation separates discovery, evidence collection,
+research generation, schema validation and pipeline orchestration.
+</p>
+
+<div class="pipeline">
+
+<div class="pipeline-step">
+    <div class="pipeline-number">01 · INPUT</div>
+    <h3>100 apps</h3>
+    <p>
+        Loads application name, category, website and developer/API hint
+        from <code>data/apps.json</code>.
+    </p>
+</div>
+
+<div class="pipeline-arrow">→</div>
+
+<div class="pipeline-step">
+    <div class="pipeline-number">02 · DISCOVERY</div>
+    <h3>Search</h3>
+    <p>
+        Generates queries around OAuth, API documentation,
+        MCP servers and developer credentials.
+    </p>
+</div>
+
+<div class="pipeline-arrow">→</div>
+
+<div class="pipeline-step">
+    <div class="pipeline-number">03 · EVIDENCE</div>
+    <h3>Fetch sources</h3>
+    <p>
+        Fetches candidate pages and keeps usable source content
+        with URLs attached.
+    </p>
+</div>
+
+<div class="pipeline-arrow">→</div>
+
+<div class="pipeline-step">
+    <div class="pipeline-number">04 · RESEARCH</div>
+    <h3>Local LLM</h3>
+    <p>
+        Qwen3 generates structured research using only the supplied
+        evidence.
+    </p>
+</div>
+
+<div class="pipeline-arrow">→</div>
+
+<div class="pipeline-step">
+    <div class="pipeline-number">05 · VALIDATE</div>
+    <h3>Pydantic</h3>
+    <p>
+        The generated JSON is parsed and validated against
+        <code>AppResearch</code>.
+    </p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- WHY OLLAMA -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<div class="two">
+
+<div class="card">
+<h2>Why Ollama?</h2>
+
+<p>
+The original implementation used the OpenAI API. During development,
+the API returned an <strong>insufficient quota</strong> error.
+</p>
+
+<p>
+Rather than stop the project, I moved the OpenAI-compatible client
+to a local Ollama endpoint.
+</p>
+
+<pre>client = OpenAI(
+    base_url="http://localhost:11434/v1",
+    api_key="ollama"
+)
+
+model = "qwen3:1.7b"</pre>
+
+<p class="small">
+This made the research agent runnable without a paid API account.
+The trade-off is model capability and inference latency.
+</p>
+
+</div>
+
+
+<div class="card">
+<h2>Why structured output?</h2>
+
+<p>
+A free-form research answer is difficult to aggregate.
+Every app therefore maps to the same schema.
+</p>
+
+<pre>AppResearch
+
+app
+category
+description
+auth_methods
+credential_access
+
+api
+ ├── public
+ ├── type
+ └── breadth
+
+mcp
+ ├── available
+ ├── source
+ └── url
+
+buildability
+blocker
+evidence[]
+confidence
+uncertainty[]</pre>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- REAL OUTPUT -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<h2>Real output from the current run</h2>
+
+<p class="subtitle">
+This is deliberately labelled as a sample. I am not presenting
+partial results as if they were the completed 100-app dataset.
+</p>
+
+<table>
+
+<thead>
+<tr>
+    <th>App</th>
+    <th>Category</th>
+    <th>API</th>
+    <th>Credential access</th>
+    <th>Buildability</th>
+    <th>Confidence</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td><strong>Salesforce</strong></td>
+<td>CRM and Sales</td>
+<td>Public / broad</td>
+<td>Self-serve</td>
+<td><span class="status done">EASY</span></td>
+<td>70%</td>
+</tr>
+
+<tr>
+<td><strong>HubSpot</strong></td>
+<td>CRM and Sales</td>
+<td>Structured result generated</td>
+<td>Structured result generated</td>
+<td><span class="status partial">GENERATED</span></td>
+<td>Generated</td>
+</tr>
+
+<tr>
+<td><strong>Pipedrive</strong></td>
+<td>CRM and Sales</td>
+<td>Research reached LLM stage</td>
+<td>Pending</td>
+<td><span class="status pending">PENDING</span></td>
+<td>Pending</td>
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="card warning" style="margin-top:18px">
+
+<strong>Important limitation discovered:</strong>
+
+<p>
+The first Salesforce result shows why verification matters.
+The model returned a plausible buildability verdict while the
+available evidence did not establish every underlying field.
+The pipeline therefore should not treat model confidence as proof.
+</p>
+
+<p>
+The intended next step is to run the verifier against fresh evidence
+and route uncertain claims to human review.
+</p>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- EVIDENCE -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<h2>Evidence-first design</h2>
+
+<div class="three">
+
+<div class="card">
+<h3>Official sources first</h3>
+<p>
+The research prompt explicitly prioritizes official developer,
+API and authentication documentation.
+</p>
+</div>
+
+<div class="card">
+<h3>No invented URLs</h3>
+<p>
+The structured prompt requires evidence URLs to come from the
+supplied source set.
+</p>
+</div>
+
+<div class="card">
+<h3>Unknown is allowed</h3>
+<p>
+When the supplied evidence cannot support a claim, the model is
+instructed to return an unknown value rather than guess.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- VERIFICATION -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<h2>Verification strategy</h2>
+
+<p class="subtitle">
+Accuracy is the most important part of this problem. I designed a
+separate verification stage instead of assuming that a generated
+answer is correct.
+</p>
+
+<table>
+
+<thead>
+<tr>
+    <th>Verification layer</th>
+    <th>Status</th>
+    <th>Purpose</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Schema validation</td>
+<td><span class="status done">IMPLEMENTED</span></td>
+<td>
+Pydantic validates the generated object against the research schema.
+</td>
+</tr>
+
+<tr>
+<td>Evidence constraints</td>
+<td><span class="status done">IMPLEMENTED</span></td>
+<td>
+Research prompts require claims to be supported by supplied sources.
+</td>
+</tr>
+
+<tr>
+<td>Dedicated verifier</td>
+<td><span class="status partial">IMPLEMENTED</span></td>
+<td>
+<code>agent/verifier.py</code> checks authentication, credentials,
+API surface, MCP, buildability and evidence quality.
+</td>
+</tr>
+
+<tr>
+<td>100-app verification run</td>
+<td><span class="status pending">NOT CLAIMED</span></td>
+<td>
+The complete run was not finished before submission.
+</td>
+</tr>
+
+<tr>
+<td>Human spot-check accuracy</td>
+<td><span class="status pending">NOT CLAIMED</span></td>
+<td>
+I do not report an accuracy percentage without actually performing
+the checks.
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- HUMAN LOOP -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<div class="card success">
+
+<h2>Where the human belongs</h2>
+
+<p>
+The goal is not to remove humans from the process completely.
+The goal is to make humans spend their time only where judgment
+adds value.
+</p>
+
+<ul>
+<li>Conflicting official documentation</li>
+<li>Unclear paid vs free credential requirements</li>
+<li>Enterprise / partner approval gates</li>
+<li>Official vs community MCP implementations</li>
+<li>Pages that are inaccessible or dynamically rendered</li>
+<li>Low-confidence or contradictory research</li>
+</ul>
+
+<p>
+Everything else should be pushed through the automated pipeline.
+</p>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- PATTERN ANALYSIS -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<h2>What the completed dataset would answer</h2>
+
+<p class="subtitle">
+I intentionally do not fabricate aggregate findings from a partial
+run. These are the decision questions the final analysis is designed
+to answer.
+</p>
+
+<div class="grid">
+
+<div class="card">
+<h3>01</h3>
+<strong>Which auth method dominates?</strong>
+<p class="small">
+OAuth2 vs API keys vs tokens vs other authentication.
+</p>
+</div>
+
+<div class="card">
+<h3>02</h3>
+<strong>Where are the gates?</strong>
+<p class="small">
+Self-serve vs paid vs admin approval vs partner/contact-sales.
+</p>
+</div>
+
+<div class="card">
+<h3>03</h3>
+<strong>Where are the easy wins?</strong>
+<p class="small">
+Public APIs with self-serve credentials and broad surfaces.
+</p>
+</div>
+
+<div class="card">
+<h3>04</h3>
+<strong>What blocks integrations?</strong>
+<p class="small">
+Recurring approval, authentication, API or documentation barriers.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- ARCHITECTURE -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<h2>Repository architecture</h2>
+
+<pre>Composio-app/
+│
+├── agent/
+│   ├── researcher.py       # source discovery + LLM research
+│   ├── schemas.py          # Pydantic research schema
+│   ├── prompts.py          # evidence-driven research prompts
+│   ├── search.py           # web search
+│   ├── web.py              # page fetching
+│   ├── verifier.py         # verification agent
+│   ├── pipeline.py         # orchestration
+│   └── analyzer.py
+│
+├── data/
+│   ├── apps.json           # 100-app research set
+│   ├── first_pass.json     # generated research output
+│   ├── verification.json
+│   └── verified.json
+│
+├── scripts/
+│   ├── run.py
+│   ├── run_research.py
+│   ├── verify_results.py
+│   └── analyze_results.py
+│
+└── case-study/
+    └── index.html          # this page</pre>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- RUN -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<h2>Run the agent</h2>
+
+<pre># create environment
+python -m venv .venv
+
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
+
+# install dependencies
+pip install -r requirements.txt
+
+# install/start Ollama
+ollama pull qwen3:1.7b
+
+# run
+python scripts/run.py</pre>
+
+<p class="small">
+The pipeline uses an OpenAI-compatible client pointed at the local
+Ollama server, so an OpenAI API key is not required for the research
+stage.
+</p>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- WHAT I WOULD DO NEXT -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<h2>If I had another iteration</h2>
+
+<div class="two">
+
+<div class="card">
+<h3>1. Finish the batch</h3>
+<p>
+Run the complete 100-app dataset with retries and persist failures
+instead of stopping the entire pipeline when one app fails.
+</p>
+</div>
+
+<div class="card">
+<h3>2. Strengthen evidence retrieval</h3>
+<p>
+Prefer direct developer documentation over generic marketing pages
+and add better handling for JavaScript-heavy documentation sites.
+</p>
+</div>
+
+<div class="card">
+<h3>3. Close the verification loop</h3>
+<p>
+Run the verifier on every result, calculate field-level accuracy on
+a manually checked sample, and record every correction.
+</p>
+</div>
+
+<div class="card">
+<h3>4. Turn findings into prioritization</h3>
+<p>
+Create an easy-win score combining API breadth, credential access,
+authentication complexity and integration blockers.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- TAKEAWAY -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<div class="card highlight">
+
+<h2>Takeaway</h2>
+
+<p class="quote">
+I treated the assignment as an operations problem, not a scraping
+problem: automate the repeatable research, preserve the evidence,
+validate the structure, and make uncertainty visible.
+</p>
+
+<p>
+The current implementation demonstrates the research loop and has
+produced real structured output. I have intentionally separated
+what is implemented from what still requires a complete batch run
+and human verification.
+</p>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- LINKS -->
+<!-- ========================================================= -->
+
+<section>
+<div class="container">
+
+<h2>Project links</h2>
+
+<div class="card">
+
+<p>
+<strong>Source repository</strong><br>
+<a href="https://github.com/spk-2005/Composio-home-assignment" target="_blank">
+https://github.com/spk-2005/Composio-home-assignment
+</a>
+</p>
+
+<p>
+<strong>Runnable command</strong><br>
+<code>python scripts/run.py</code>
+</p>
+
+<p>
+<strong>Case study</strong><br>
+This page.
+</p>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer class="footer">
+
+<div class="container">
+
+<strong>Composio App Research Agent</strong>
+
+<p>
+AI Product Ops Intern — Take-home case study.
+</p>
+
+<p>
+Accuracy claims are intentionally limited to evidence produced by
+the current implementation. No incomplete batch or unverified
+statistics are presented as final findings.
+</p>
+
+</div>
+
+</footer>
+
+</body>
+</html>
